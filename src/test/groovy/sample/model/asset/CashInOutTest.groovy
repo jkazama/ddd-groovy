@@ -11,9 +11,9 @@ import sample.util.DateUtils
 //low: 簡易な正常系検証が中心。依存するCashflow/CashBalanceの単体検証パスを前提。
 class CashInOutTest  extends UnitTestSupport {
 
-	String ccy = "JPY";
-	String accId = "test";
-	String baseDay = "20141118";
+	String ccy = "JPY"
+	String accId = "test"
+	String baseDay = "20141118"
 
 	@Before
 	void before() {
@@ -27,7 +27,7 @@ class CashInOutTest  extends UnitTestSupport {
 	void find() {
 		def cio = fixtures.cio(accId, "300", true)
 		cio.updateDate = DateUtils.date("20141118")
-		cio.save(rep);
+		cio.save(rep)
 		//low: ちゃんとやると大変なので最低限の検証
 		assertThat(
 			CashInOut.find(rep, findParam("20141118", "20141119")),
@@ -44,7 +44,7 @@ class CashInOutTest  extends UnitTestSupport {
 	}
 	
 	private FindCashInOut findParam(String fromDay, String toDay, ActionStatusType... statusTypes) {
-		return new FindCashInOut(ccy, statusTypes, fromDay, toDay);
+		new FindCashInOut(ccy, statusTypes, fromDay, toDay)
 	}
 
 	@Test
