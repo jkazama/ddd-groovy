@@ -76,7 +76,11 @@ class RestErrorAdvice {
 				if (arg instanceof MessageSourceResolvable) return
 				args.add(arg.toString())
 			}
-			warns.add(field, oe.getDefaultMessage(), args as String[])
+			String message = oe.getDefaultMessage()
+			if (0 <= oe.getCodes()[0].indexOf("typeMismatch")) {
+				message = oe.getCodes()[2]
+			}
+			warns.add(field, message, args as String[])
 		}
 		new ErrorHolder(msg, warns.list).result(HttpStatus.BAD_REQUEST)
 	}
