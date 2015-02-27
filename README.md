@@ -5,7 +5,7 @@ ddd-groovy
 
 [ddd-java](https://github.com/jkazama/ddd-java)のGroovy版サンプル実装です。  
 
-本サンプルでは[SpringBoot](http://projects.spring.io/spring-boot/)と[Groovy](http://groovy.codehaus.org/)を利用してドメインモデリングの実装例を示します。SpringBootは1.2、Groovyは2.3を利用しています。  
+本サンプルでは[SpringBoot](http://projects.spring.io/spring-boot/)と[Groovy](http://groovy.codehaus.org/)を利用してドメインモデリングの実装例を示します。SpringBootは1.2、Groovyは2.4を利用しています。  
 ※JavaDocに記載をしていますが、サンプルに特化させているので実際の製品コードが含まれているわけではありません。  
 
 ### レイヤリングの考え方
@@ -93,6 +93,7 @@ main
 1. *Application.groovy*に対し「右クリック -> Run As -> Java Application」
 1. *Console*タブに「Started Application」という文字列が出力されればポート8080で起動が完了
 
+※Groovyプラグインのバージョンによっては[GROOVY-7278](https://jira.codehaus.org/browse/GROOVY-7278)の不具合に引っかかるので注意してください。
 
 ### コンソール
 
