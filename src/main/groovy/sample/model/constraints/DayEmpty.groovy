@@ -34,6 +34,6 @@ import javax.validation.constraints.*
 	int max() default 8
 	
 	@OverridesAttribute(constraint = Pattern.class, name = "regexp")
-	String regexp() default '^\\d{8}$'
+	String regexp() default '^\\d{8}|\\d{0}$'
 
 }
