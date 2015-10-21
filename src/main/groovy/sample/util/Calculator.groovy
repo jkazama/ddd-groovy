@@ -69,7 +69,7 @@ final class Calculator {
 	 * @param v 計算値
 	 */
 	Calculator add(BigDecimal v) {
-		value.set(rounding(decimal().add(v)))
+		value.set(rounding(value.get().add(v)))
 		this
 	}
 
@@ -90,7 +90,7 @@ final class Calculator {
 	 * @param v 計算値
 	 */
 	Calculator subtract(BigDecimal v) {
-		value.set(roundingAlways ? decimal().subtract(v).setScale(scale, mode) : decimal().subtract(v))
+		value.set(rounding(value.get().subtract(v)))
 		this
 	}
 
@@ -107,7 +107,7 @@ final class Calculator {
 	 * @param v 計算値
 	 */
 	Calculator multiply(BigDecimal v) {
-		value.set(roundingAlways ? decimal().multiply(v).setScale(scale, mode) : decimal().multiply(v))
+		value.set(rounding(value.get().multiply(v)))
 		this
 	}
 
@@ -124,7 +124,7 @@ final class Calculator {
 	 * @param v 計算値
 	 */
 	Calculator divideBy(BigDecimal v) {
-		value.set(roundingAlways ? decimal().divide(v, scale, mode) : decimal().divide(v, defaultScale, mode))
+		value.set(roundingAlways ? value.get().divide(v, scale, mode) : value.get().divide(v, defaultScale, mode))
 		this
 	}
 
