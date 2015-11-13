@@ -29,7 +29,7 @@ class Asset {
 	 */
 	boolean canWithdraw(final JpaRepository rep, String currency, BigDecimal absAmount, String valueDay) {
 		def calc = Calculator.init(CashBalance.getOrNew(rep, id, currency).amount)
-		Cashflow.findUnrealize(rep, valueDay).each { calc.add(it.amount) }
+		Cashflow.findUnrealize(rep, id, currency, valueDay).each { calc.add(it.amount) }
 		CashInOut.findUnprocessed(rep, id, currency, true).each { calc.add(it.absAmount.negate()) }
 		calc.add(absAmount.negate())
 		0 <= calc.decimal().signum()
