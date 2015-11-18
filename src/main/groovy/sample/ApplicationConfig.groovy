@@ -4,10 +4,12 @@ import groovy.transform.CompileStatic
 
 import javax.validation.Validator
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource
 import org.springframework.context.annotation.*
 import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper
 
@@ -19,28 +21,26 @@ import com.fasterxml.jackson.databind.ObjectMapper
  */
 @CompileStatic
 @Configuration
-class ApplicationConfig {
+class ApplicationConfig {}
 
-	/**
-	 * BeanValidationメッセージのUTF-8に対応したValidator。
-	 * <p>WebMvcAutoConfigurationAdapterの拡張もあわせて確認してください。
-	 */
+/** SpringMvcの拡張コンフィギュレーション */
+@CompileStatic
+@Configuration
+class WebMvcConfig extends WebMvcConfigurerAdapter {
+	@Autowired
+	private MessageSource message;
+	
+	/** BeanValidationメッセージのUTF-8に対応したValidator。 */
 	@Bean
-	Validator validator(final MessageSource message) {
-		def factory = new LocalValidatorFactoryBean()
-		factory.setValidationMessageSource(message)
-		factory
+	LocalValidatorFactoryBean validator() {
+		LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
+		factory.setValidationMessageSource(message);
+		return factory;
 	}
-
-	/**
-	 * Jackson(JSON変換ライブラリ)の日付フォーマットをISOベースに変換しています。
-	 */
-	@Bean
-	ObjectMapper objectMapper() {
-		def bean = new Jackson2ObjectMapperFactoryBean()
-		bean.setIndentOutput(true)
-		bean.setSimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-		bean.afterPropertiesSet()
-		bean.getObject()
+	
+	/** 標準Validatorの差し替えをします。 */
+	@Override
+	org.springframework.validation.Validator getValidator() {
+		return validator();
 	}
 }
