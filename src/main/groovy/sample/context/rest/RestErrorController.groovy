@@ -21,16 +21,16 @@ import sample.context.RestStaticController
 @RestStaticController
 class RestErrorController implements ErrorController {
 
-	@Autowired
-	ErrorAttributes errorAttributes
+    @Autowired
+    ErrorAttributes errorAttributes
 
-	@Override
-	String getErrorPath() {
-		"/error"
-	}
+    @Override
+    String getErrorPath() {
+        "/error"
+    }
 
-	@RequestMapping("/error")
-	Map<String, Object> error(HttpServletRequest request) {
-		errorAttributes.getErrorAttributes(new ServletRequestAttributes(request), false)
-	}
+    @RequestMapping("/error")
+    Map<String, Object> error(HttpServletRequest request) {
+        errorAttributes.getErrorAttributes(new ServletRequestAttributes(request), false)
+    }
 }

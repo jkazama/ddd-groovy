@@ -20,43 +20,43 @@ import sample.usecase.report.ServiceReportExporter
  */
 abstract class ServiceSupport {
 
-	@Autowired
-	protected MessageSource msg
+    @Autowired
+    protected MessageSource msg
 
-	@Autowired
-	protected DomainHelper dh
-	@Autowired
-	protected DefaultRepository rep
-	@Autowired
-	protected PlatformTransactionManager txManager
-	@Autowired
-	protected IdLockHandler idLock
+    @Autowired
+    protected DomainHelper dh
+    @Autowired
+    protected DefaultRepository rep
+    @Autowired
+    protected PlatformTransactionManager txManager
+    @Autowired
+    protected IdLockHandler idLock
 
-	@Autowired
-	protected AuditHandler audit
-	@Autowired
-	protected ServiceMailDeliver mail
-	@Autowired
-	protected ServiceReportExporter report
+    @Autowired
+    protected AuditHandler audit
+    @Autowired
+    protected ServiceMailDeliver mail
+    @Autowired
+    protected ServiceReportExporter report
 
-	/** i18nメッセージ変換を行います。 */
-	protected String msg(String message) {
-		msg.getMessage(message, null, message, Locale.getDefault())
-	}
+    /** i18nメッセージ変換を行います。 */
+    protected String msg(String message) {
+        msg.getMessage(message, null, message, Locale.getDefault())
+    }
 
-	/** 利用者を返します。 */
-	protected Actor actor() {
-		dh.actor()
-	}
+    /** 利用者を返します。 */
+    protected Actor actor() {
+        dh.actor()
+    }
 
-	/** トランザクション処理を実行します。 */
-	protected <V> V tx(Closure<V> clos) {
-		new TransactionTemplate(txManager).execute { status -> clos.call() }
-	}
+    /** トランザクション処理を実行します。 */
+    protected <V> V tx(Closure<V> clos) {
+        new TransactionTemplate(txManager).execute { status -> clos.call() }
+    }
 
-	/** 口座ロック付でトランザクション処理を実行します。 */
-	protected <V> V tx(String accountId, LockType lockType, final Callable<V> callable) {
-		idLock.lock(accountId, lockType, { tx(callable)	})
-	}
+    /** 口座ロック付でトランザクション処理を実行します。 */
+    protected <V> V tx(String accountId, LockType lockType, final Callable<V> callable) {
+        idLock.lock(accountId, lockType, { tx(callable)    })
+    }
 
 }

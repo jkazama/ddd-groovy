@@ -24,21 +24,21 @@ import javax.validation.constraints.*
 @Size
 @Pattern(regexp = "")
 @interface Email {
-	String message() default "{error.domain.email}"
+    String message() default "{error.domain.email}"
 
-	@SuppressWarnings("rawtypes")
-	Class<?>[] groups() default []
+    @SuppressWarnings("rawtypes")
+    Class<?>[] groups() default []
 
-	@SuppressWarnings("rawtypes")
-	Class<? extends Payload>[] payload() default []
+    @SuppressWarnings("rawtypes")
+    Class<? extends Payload>[] payload() default []
 
-	@OverridesAttribute(constraint = Size.class, name = "max")
-	int max() default 256
+    @OverridesAttribute(constraint = Size.class, name = "max")
+    int max() default 256
 
-	@OverridesAttribute(constraint = Pattern.class, name = "regexp")
-	String regexp() default '.*'
+    @OverridesAttribute(constraint = Pattern.class, name = "regexp")
+    String regexp() default '.*'
 
-	@OverridesAttribute(constraint = Pattern.class, name = "flags")
-	Pattern.Flag[] flags() default []
+    @OverridesAttribute(constraint = Pattern.class, name = "flags")
+    Pattern.Flag[] flags() default []
 
 }

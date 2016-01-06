@@ -10,17 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired
 @StaticComponent
 class DomainHelper {
 
-	/** 日時ユーティリティ */
-	@Autowired
-	Timestamper time
-	@Autowired
-	ActorSession actorSession
-	/** ID生成ユーティリティ */
-	@Autowired
-	IdGenerator uid
+    /** 日時ユーティリティ */
+    @Autowired
+    Timestamper time
+    @Autowired
+    ActorSession actorSession
+    /** ID生成ユーティリティ */
+    @Autowired
+    IdGenerator uid
 
-	/** ログイン中のユースケース利用者 */
-	Actor actor() {
-		actorSession.actor()
-	}
+    /** ログイン中のユースケース利用者 */
+    Actor actor() {
+        actorSession.actor()
+    }
 }

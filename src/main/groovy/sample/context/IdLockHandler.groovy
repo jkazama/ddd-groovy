@@ -14,63 +14,63 @@ import sample.InvocationException
 @StaticComponent
 class IdLockHandler {
 
-	private Map<Serializable, ReentrantReadWriteLock> lockMap = new HashMap<>()
+    private Map<Serializable, ReentrantReadWriteLock> lockMap = new HashMap<>()
 
-	/** IDロック上で処理を実行します。 */
-	def <V> V lock(Serializable id, LockType lockType, Closure<V> clos) {
-		lockType.isWrite() ? writeLock(id) : readLock(id)
-		try {
-			clos.call()
-		} catch (RuntimeException e) {
-			throw e
-		} catch (Exception e) {
-			throw new InvocationException("error.Exception", e)
-		} finally {
-			unlock(id)
-		}
-	}
+    /** IDロック上で処理を実行します。 */
+    def <V> V lock(Serializable id, LockType lockType, Closure<V> clos) {
+        lockType.isWrite() ? writeLock(id) : readLock(id)
+        try {
+            clos.call()
+        } catch (RuntimeException e) {
+            throw e
+        } catch (Exception e) {
+            throw new InvocationException("error.Exception", e)
+        } finally {
+            unlock(id)
+        }
+    }
 
-	void writeLock(Serializable id) {
-		if (!id) return
-		synchronized (lockMap) {
-			idLock(id).writeLock().lock()
-		}
-	}
+    void writeLock(Serializable id) {
+        if (!id) return
+        synchronized (lockMap) {
+            idLock(id).writeLock().lock()
+        }
+    }
 
-	private ReentrantReadWriteLock idLock(Serializable id) {
-		if (!lockMap.containsKey(id)) lockMap[id] = new ReentrantReadWriteLock()
-		lockMap[id]
-	}
+    private ReentrantReadWriteLock idLock(Serializable id) {
+        if (!lockMap.containsKey(id)) lockMap[id] = new ReentrantReadWriteLock()
+        lockMap[id]
+    }
 
-	void readLock(Serializable id) {
-		if (!id) return
-		synchronized (lockMap) {
-			idLock(id).readLock().lock()
-		}
-	}
+    void readLock(Serializable id) {
+        if (!id) return
+        synchronized (lockMap) {
+            idLock(id).readLock().lock()
+        }
+    }
 
-	void unlock(Serializable id) {
-		if (!id) return
-		synchronized (lockMap) {
-			def idLock = idLock(id)
-			idLock.isWriteLockedByCurrentThread() ? idLock.writeLock().unlock() : idLock.readLock().unlock()
-		}
-	}
+    void unlock(Serializable id) {
+        if (!id) return
+        synchronized (lockMap) {
+            def idLock = idLock(id)
+            idLock.isWriteLockedByCurrentThread() ? idLock.writeLock().unlock() : idLock.readLock().unlock()
+        }
+    }
 }
 
 /** ロック種別を表現するEnum */
 enum LockType {
-	/** 読み取り専用ロック */
-	READ,
-	/** 読み書き専用ロック */
-	WRITE
+    /** 読み取り専用ロック */
+    READ,
+    /** 読み書き専用ロック */
+    WRITE
 
-	boolean isRead() {
-		!isWrite()
-	}
+    boolean isRead() {
+        !isWrite()
+    }
 
-	boolean isWrite() {
-		this == WRITE
-	}
+    boolean isWrite() {
+        this == WRITE
+    }
 }
 

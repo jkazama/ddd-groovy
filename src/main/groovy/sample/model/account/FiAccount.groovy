@@ -16,32 +16,32 @@ import sample.model.constraints.*
 @JpaStaticEntity
 @NamedQuery(name = "FiAccount.load", query = "from FiAccount a where a.accountId=?1 and a.category=?2 and a.currency=?3")
 class FiAccount extends JpaActiveRecord<FiAccount> {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/** ID */
-	@Id
-	@GeneratedValue
-	Long id
-	/** 口座ID */
-	@AccountId
-	String accountId
-	/** 利用用途カテゴリ */
-	@Category
-	String category
-	/** 通貨 */
-	@Currency
-	String currency
-	/** 金融機関コード */
-	@IdStr
-	String fiCode
-	/** 金融機関口座ID */
-	@AccountId
-	String fiAccountId
+    /** ID */
+    @Id
+    @GeneratedValue
+    Long id
+    /** 口座ID */
+    @AccountId
+    String accountId
+    /** 利用用途カテゴリ */
+    @Category
+    String category
+    /** 通貨 */
+    @Currency
+    String currency
+    /** 金融機関コード */
+    @IdStr
+    String fiCode
+    /** 金融機関口座ID */
+    @AccountId
+    String fiAccountId
 
-	static FiAccount load(final JpaRepository rep, String accountId, String category, String currency) {
-		List<FiAccount> list = rep.tmpl().find("FiAccount.load", accountId, category, currency)
-		if (list.isEmpty()) throw new ValidationException("error.Entity.load");
-		list.head()
-	}
-	
+    static FiAccount load(final JpaRepository rep, String accountId, String category, String currency) {
+        List<FiAccount> list = rep.tmpl().find("FiAccount.load", accountId, category, currency)
+        if (list.isEmpty()) throw new ValidationException("error.Entity.load");
+        list.head()
+    }
+    
 }

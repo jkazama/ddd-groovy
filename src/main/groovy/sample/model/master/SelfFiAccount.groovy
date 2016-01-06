@@ -14,29 +14,29 @@ import sample.model.constraints.*
 @JpaStaticEntity
 @NamedQuery(name = "SelfFiAccount.load", query = "from SelfFiAccount a where a.category=?1 and a.currency=?2")
 class SelfFiAccount  extends JpaActiveRecord<SelfFiAccount> {
-	private static final long serialVersionUID = 1L
+    private static final long serialVersionUID = 1L
 
-	/** ID */
-	@Id
-	@GeneratedValue
-	Long id
-	/** 利用用途カテゴリ */
-	@Category
-	String category
-	/** 通貨 */
-	@Currency
-	String currency
-	/** 金融機関コード */
-	@IdStr
-	String fiCode
-	/** 金融機関口座ID */
-	@AccountId
-	String fiAccountId
+    /** ID */
+    @Id
+    @GeneratedValue
+    Long id
+    /** 利用用途カテゴリ */
+    @Category
+    String category
+    /** 通貨 */
+    @Currency
+    String currency
+    /** 金融機関コード */
+    @IdStr
+    String fiCode
+    /** 金融機関口座ID */
+    @AccountId
+    String fiAccountId
 
-	static SelfFiAccount load(final JpaRepository rep, String category, String currency) {
-		List<SelfFiAccount> list = rep.tmpl().find("SelfFiAccount.load", category, currency)
-		if (list.isEmpty()) throw new IllegalStateException("自社金融機関情報が登録されていません。[$category:$currency]");
-		list.head()
-	}
+    static SelfFiAccount load(final JpaRepository rep, String category, String currency) {
+        List<SelfFiAccount> list = rep.tmpl().find("SelfFiAccount.load", category, currency)
+        if (list.isEmpty()) throw new IllegalStateException("自社金融機関情報が登録されていません。[$category:$currency]");
+        list.head()
+    }
 
 }

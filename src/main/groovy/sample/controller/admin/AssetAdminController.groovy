@@ -18,13 +18,13 @@ import sample.usecase.AssetAdminService
 @RequestMapping("/admin/asset")
 class AssetAdminController {
 
-	@Autowired
-	private AssetAdminService service;
+    @Autowired
+    private AssetAdminService service;
 
-	/** 未処理の振込依頼情報を検索します。 */
-	@RequestMapping(value = "/cio")
-	List<CashInOut> findCashInOut(@Valid FindCashInOut p) {
-		service.findCashInOut(p);
-	}
+    /** 未処理の振込依頼情報を検索します。 */
+    @RequestMapping(value = "/cio")
+    List<CashInOut> findCashInOut(@Valid FindCashInOut p) {
+        service.findCashInOut(p);
+    }
 
 }

@@ -35,44 +35,44 @@ import sample.util.Validator
  */
 abstract class JpaActiveRecord<T extends Entity> implements Serializable, Entity {
 
-	/**
-	 * @return 審査ユーティリティを生成します。
-	 */
-	protected Validator validator() {
-		new Validator()
-	}
+    /**
+     * @return 審査ユーティリティを生成します。
+     */
+    protected Validator validator() {
+        new Validator()
+    }
 
-	/**
-	 * 与えられたレポジトリを経由して自身を新規追加します。
-	 * @param rep 永続化の際に利用する関連{@link JpaRepository}
-	 * @return 自身の情報
-	 */
-	T save(final JpaRepository rep) {
-		rep.save(this)
-	}
+    /**
+     * 与えられたレポジトリを経由して自身を新規追加します。
+     * @param rep 永続化の際に利用する関連{@link JpaRepository}
+     * @return 自身の情報
+     */
+    T save(final JpaRepository rep) {
+        rep.save(this)
+    }
 
-	/**
-	 * 与えられたレポジトリを経由して自身を更新します。
-	 * @param rep 永続化の際に利用する関連{@link JpaRepository}
-	 */
-	public T update(final JpaRepository rep) {
-		rep.update(this)
-	}
+    /**
+     * 与えられたレポジトリを経由して自身を更新します。
+     * @param rep 永続化の際に利用する関連{@link JpaRepository}
+     */
+    public T update(final JpaRepository rep) {
+        rep.update(this)
+    }
 
-	/**
-	 * 与えられたレポジトリを経由して自身を物理削除します。
-	 * @param rep 永続化の際に利用する関連{@link JpaRepository}
-	 */
-	T delete(final JpaRepository rep) {
-		rep.delete(this)
-	}
+    /**
+     * 与えられたレポジトリを経由して自身を物理削除します。
+     * @param rep 永続化の際に利用する関連{@link JpaRepository}
+     */
+    T delete(final JpaRepository rep) {
+        rep.delete(this)
+    }
 
-	/**
-	 * 与えられたレポジトリを経由して自身を新規追加または更新します。
-	 * @param rep 永続化の際に利用する関連{@link JpaRepository}
-	 */
-	T saveOrUpdate(final JpaRepository rep) {
-		rep.saveOrUpdate(this)
-	}
+    /**
+     * 与えられたレポジトリを経由して自身を新規追加または更新します。
+     * @param rep 永続化の際に利用する関連{@link JpaRepository}
+     */
+    T saveOrUpdate(final JpaRepository rep) {
+        rep.saveOrUpdate(this)
+    }
 
 }

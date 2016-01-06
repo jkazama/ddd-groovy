@@ -22,17 +22,17 @@ import javax.validation.constraints.*
 @Digits(integer = 16, fraction = 4)
 @DecimalMin("0.00")
 @interface AbsAmount {
-	String message() default "{error.domain.absAmount}"
+    String message() default "{error.domain.absAmount}"
 
-	@SuppressWarnings("rawtypes")
-	Class<?>[] groups() default []
+    @SuppressWarnings("rawtypes")
+    Class<?>[] groups() default []
 
-	@SuppressWarnings("rawtypes")
-	Class<? extends Payload>[] payload() default []
+    @SuppressWarnings("rawtypes")
+    Class<? extends Payload>[] payload() default []
 
-	@OverridesAttribute(constraint = Digits.class, name = "integer")
-	int integer() default 16
+    @OverridesAttribute(constraint = Digits.class, name = "integer")
+    int integer() default 16
 
-	@OverridesAttribute(constraint = Digits.class, name = "fraction")
-	int fraction() default 4
+    @OverridesAttribute(constraint = Digits.class, name = "fraction")
+    int fraction() default 4
 }

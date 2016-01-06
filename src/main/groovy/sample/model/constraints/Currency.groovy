@@ -22,18 +22,18 @@ import javax.validation.constraints.*
 @Size
 @Pattern(regexp = "")
 @interface Currency {
-	String message() default "{error.domain.currency}"
+    String message() default "{error.domain.currency}"
 
-	@SuppressWarnings("rawtypes")
-	Class<?>[] groups() default []
+    @SuppressWarnings("rawtypes")
+    Class<?>[] groups() default []
 
-	@SuppressWarnings("rawtypes")
-	Class<? extends Payload>[] payload() default []
+    @SuppressWarnings("rawtypes")
+    Class<? extends Payload>[] payload() default []
 
-	@OverridesAttribute(constraint = Size.class, name = "max")
-	int max() default 3
-	
-	@OverridesAttribute(constraint = Pattern.class, name = "regexp")
-	String regexp() default '^[a-zA-Z]{3}$'
+    @OverridesAttribute(constraint = Size.class, name = "max")
+    int max() default 3
+    
+    @OverridesAttribute(constraint = Pattern.class, name = "regexp")
+    String regexp() default '^[a-zA-Z]{3}$'
 
-	}
+    }

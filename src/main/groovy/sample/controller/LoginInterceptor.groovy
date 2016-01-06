@@ -15,28 +15,28 @@ import sample.context.*
 @StaticComponent
 class LoginInterceptor {
 
-	@Autowired
-	private ActorSession session
-	
-	@Before("execution(* sample.controller.*Controller.*(..))")
-	void bindUser() {
-		session.bind(Actor.by("sample", ActorRoleType.USER))
-	}
-	
-	@Before("execution(* sample.controller.admin.*Controller.*(..))")
-	void bindAdmin() {
-		session.bind(Actor.by("admin", ActorRoleType.INTERNAL))
-	}
-	
-	@Before("execution(* sample.controller.system.*Controller.*(..))")
-	void bindSystem() {
-		session.bind(Actor.System)
-	}
-	
-	@After("execution(* sample.controller..*Controller.*(..))")
-	void unbind() {
-		session.unbind()
-	}
+    @Autowired
+    private ActorSession session
+    
+    @Before("execution(* sample.controller.*Controller.*(..))")
+    void bindUser() {
+        session.bind(Actor.by("sample", ActorRoleType.USER))
+    }
+    
+    @Before("execution(* sample.controller.admin.*Controller.*(..))")
+    void bindAdmin() {
+        session.bind(Actor.by("admin", ActorRoleType.INTERNAL))
+    }
+    
+    @Before("execution(* sample.controller.system.*Controller.*(..))")
+    void bindSystem() {
+        session.bind(Actor.System)
+    }
+    
+    @After("execution(* sample.controller..*Controller.*(..))")
+    void unbind() {
+        session.unbind()
+    }
 
-	
+    
 }

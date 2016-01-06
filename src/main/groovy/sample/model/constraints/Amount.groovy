@@ -21,17 +21,17 @@ import javax.validation.constraints.*
 @NotNull
 @Digits(integer = 16, fraction = 4)
 @interface Amount {
-	String message() default "{error.domain.amount}"
+    String message() default "{error.domain.amount}"
 
-	@SuppressWarnings("rawtypes")
-	Class<?>[] groups() default []
+    @SuppressWarnings("rawtypes")
+    Class<?>[] groups() default []
 
-	@SuppressWarnings("rawtypes")
-	Class<? extends Payload>[] payload() default []
+    @SuppressWarnings("rawtypes")
+    Class<? extends Payload>[] payload() default []
 
-	@OverridesAttribute(constraint = Digits.class, name = "integer")
-	int integer() default 16
+    @OverridesAttribute(constraint = Digits.class, name = "integer")
+    int integer() default 16
 
-	@OverridesAttribute(constraint = Digits.class, name = "fraction")
-	int fraction() default 4
+    @OverridesAttribute(constraint = Digits.class, name = "fraction")
+    int fraction() default 4
 }

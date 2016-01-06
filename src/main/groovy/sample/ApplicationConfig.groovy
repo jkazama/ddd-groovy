@@ -27,20 +27,20 @@ class ApplicationConfig {}
 @CompileStatic
 @Configuration
 class WebMvcConfig extends WebMvcConfigurerAdapter {
-	@Autowired
-	private MessageSource message;
-	
-	/** BeanValidationメッセージのUTF-8に対応したValidator。 */
-	@Bean
-	LocalValidatorFactoryBean validator() {
-		LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
-		factory.setValidationMessageSource(message);
-		return factory;
-	}
-	
-	/** 標準Validatorの差し替えをします。 */
-	@Override
-	org.springframework.validation.Validator getValidator() {
-		return validator();
-	}
+    @Autowired
+    private MessageSource message;
+    
+    /** BeanValidationメッセージのUTF-8に対応したValidator。 */
+    @Bean
+    LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
+        factory.setValidationMessageSource(message);
+        return factory;
+    }
+    
+    /** 標準Validatorの差し替えをします。 */
+    @Override
+    org.springframework.validation.Validator getValidator() {
+        return validator();
+    }
 }

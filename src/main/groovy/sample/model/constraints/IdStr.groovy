@@ -22,21 +22,21 @@ import javax.validation.constraints.*
 @Size
 @Pattern(regexp = "")
 @interface IdStr {
-	String message() default "{error.domain.idStr}"
+    String message() default "{error.domain.idStr}"
 
-	@SuppressWarnings("rawtypes")
-	Class<?>[] groups() default []
+    @SuppressWarnings("rawtypes")
+    Class<?>[] groups() default []
 
-	@SuppressWarnings("rawtypes")
-	Class<? extends Payload>[] payload() default []
+    @SuppressWarnings("rawtypes")
+    Class<? extends Payload>[] payload() default []
 
-	@OverridesAttribute(constraint = Size.class, name = "max")
-	int max() default 32
+    @OverridesAttribute(constraint = Size.class, name = "max")
+    int max() default 32
 
-	@OverridesAttribute(constraint = Pattern.class, name = "regexp")
-	String regexp() default '^\\p{ASCII}*$'
+    @OverridesAttribute(constraint = Pattern.class, name = "regexp")
+    String regexp() default '^\\p{ASCII}*$'
 
-	@OverridesAttribute(constraint = Pattern.class, name = "flags")
-	Pattern.Flag[] flags() default []
+    @OverridesAttribute(constraint = Pattern.class, name = "flags")
+    Pattern.Flag[] flags() default []
 
 }

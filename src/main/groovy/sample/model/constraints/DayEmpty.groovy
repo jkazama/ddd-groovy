@@ -22,18 +22,18 @@ import javax.validation.constraints.*
 @Size
 @Pattern(regexp = "")
 @interface DayEmpty {
-	String message() default "{error.domain.day}"
+    String message() default "{error.domain.day}"
 
-	@SuppressWarnings("rawtypes")
-	Class<?>[] groups() default []
+    @SuppressWarnings("rawtypes")
+    Class<?>[] groups() default []
 
-	@SuppressWarnings("rawtypes")
-	Class<? extends Payload>[] payload() default []
+    @SuppressWarnings("rawtypes")
+    Class<? extends Payload>[] payload() default []
 
-	@OverridesAttribute(constraint = Size.class, name = "max")
-	int max() default 8
-	
-	@OverridesAttribute(constraint = Pattern.class, name = "regexp")
-	String regexp() default '^\\d{8}|\\d{0}$'
+    @OverridesAttribute(constraint = Size.class, name = "max")
+    int max() default 8
+    
+    @OverridesAttribute(constraint = Pattern.class, name = "regexp")
+    String regexp() default '^\\d{8}|\\d{0}$'
 
 }

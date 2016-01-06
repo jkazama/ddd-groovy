@@ -10,7 +10,7 @@ buildscript {
 apply plugin: "groovy"
 apply plugin: "spring-boot"
 
-version = "1.1.1"
+version = "1.2.0"
 
 sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
